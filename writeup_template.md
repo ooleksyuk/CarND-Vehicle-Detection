@@ -151,8 +151,31 @@ I was playing with different combinations. From the Lesson I've learned to use `
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using...
+I trained a linear SVM using `LinearSVC()`.
+```python
+    #Split up data into randomized training and test sets
+    rand_state = np.random.randint(0, 100)
+    X_train, X_test, y_train, y_test = train_test_split(
+        scaled_X, y, test_size=0.2, random_state=rand_state)
 
+    print('Using:',orient,'orientations',pix_per_cell,
+        'pixels per cell and', cell_per_block,'cells per block')
+    print('Feature vector length:', len(X_train[0]))
+    #Use a linear SVC
+    svc = LinearSVC()
+```
+The output of training of the model looks like this:
+```python
+Extracting Features...
+120.99 Seconds to extract features
+('Using:', 9, 'orientations', 8, 'pixels per cell and', 2, 'cells per block')
+('Feature vector length:', 6156)
+(7.0, 'Seconds to train SVC...')
+Test Accuracy of SVC = 0.9921
+('SVC predicts: ', array([ 0.,  0.,  0.,  1.,  0.,  1.,  1.,  1.,  0.,  0.]))
+('For these', 10, 'labels: ', array([ 0.,  0.,  0.,  1.,  0.,  1.,  1.,  1.,  0.,  0.]))
+(0.0017, 'Seconds to predict', 10, 'labels with SVC')
+```
 ###Sliding Window Search
 
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
