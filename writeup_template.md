@@ -43,6 +43,22 @@ You're reading it!
 The code for this step is contained in the first code cell of the IPython notebook `def get_hog_features`.  
 
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
+```python
+def import_images():
+    cars = glob.glob('./data/vehicles/**/*.png')
+    notcars = glob.glob('./data/non-vehicles/**/*.png')
+    num_of_car_images = len(cars)
+    num_of_notcar_images = len(cars)
+
+    print('Number of Car images = {}'.format(num_of_car_images))
+    print('Number of Not-Car images = {}'.format(num_of_notcar_images))
+    return cars, notcars
+```
+The result is 
+```python
+Number of Car images = 8792
+Number of Not-Car images = 8792
+```
 ![alt text][image1]
 
 I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
@@ -131,7 +147,7 @@ def plot3d(pixels, colors_rgb, axis_labels=list("RGB"), axis_limits=[(0, 255), (
 
 ####2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and...
+I was playing with different combinations. From the Lesson I've learned to use `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`. After doint testing on project I have ended up using `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`.
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
