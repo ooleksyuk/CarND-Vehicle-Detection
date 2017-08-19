@@ -94,6 +94,8 @@ def extract_features(imgs, cspace='RGB', spatial_size=(32, 32),
     #Return list of feature vectors
     return features
 ```
+![alt text][image21]
+
 For 3D representation of an image I used this function:
 ```python
 from mpl_toolkits.mplot3d import Axes3D
@@ -125,7 +127,6 @@ def plot3d(pixels, colors_rgb, axis_labels=list("RGB"), axis_limits=[(0, 255), (
 
     return ax  # return Axes3D object for further manipulation
 ```
-![alt text][image21]
 ![alt text][image22]
 
 ####2. Explain how you settled on your final choice of HOG parameters.
