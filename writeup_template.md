@@ -238,6 +238,17 @@ Here's an example result showing the heatmap from a series of frames of video, t
 ###Discussion
 
 ####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+It takes a lot of time to detect vehicle prosecc project video locally. I have read about [YOLO](https://pjreddie.com/darknet/yolo/), it was too close to the end of the project soft deadline so I descided t try it later.
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+Probelms I have faced were mainly with detection accuracy. I was important to balance clisifier accuracy and execution speed. Some vehicles can change possion faster than another, this aspect brings more inacccuracy and misclassification. In the frame were black car was passing in fron of the white car that algorythm detected overlapping tow vehicles as one object and draw one wide rectangular, even there were two cars in the frame.
+
+Producing a very high accuracy classifier and maximizing window overlap might improve the per-frame accuracy to the point that integrating detections from previous frames is unnecessary.
+
+The pipeline is probably most likely to fail in cases where vehicles or the HOG features as they don't resemble those in the training dataset, but lighting and environmental conditions might also play a role (like a white car against a white background, gray car on the asphalt road).
+
+I believe that the best approach, given plenty of time to pursue it, would be to combine a very high accuracy classifier with high overlap in the search windows. The execution cost could be offset with more intelligent tracking strategies, such as:
+
+* determine vehicle location and speed to predict its location in subsequent frames
+* begin with expected vehicle locations and largest scale search areas, and include overlap and redundant detections from smaller scale search areas to speed up execution
+* use a convolutional neural network, to do the sliding window search 
 
