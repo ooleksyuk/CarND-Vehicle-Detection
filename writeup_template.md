@@ -164,6 +164,12 @@ I trained a linear SVM using `LinearSVC()`.
     #Use a linear SVC
     svc = LinearSVC()
 ```
+As input params to train the model I used 
+```python
+        color_space='YCrCb', orient=9, pix_per_cell=8, cell_per_block=2,
+        hog_channel='ALL', spatial_size=(16, 16), hist_bins=32, spatial_feat=True,
+        hist_feat=True, hog_feat=True
+```
 The output of training of the model looks like this:
 ```python
 Extracting Features...
@@ -180,7 +186,25 @@ Test Accuracy of SVC = 0.9921
 
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
+To search for windows I used `slide_window` and `search_windows` function.
+```python
+    x_start_stop = [None, None]
+    xy_overlap = (0.75, 0.75)
+
+    y_start_stops = [[400, 645], [400, 600], [400, 550]]
+    xy_windows = [(128, 128), (96, 96), (64, 64)]
+
+    windows = []
+
+    for y_start_stop, xy_window in zip(y_start_stops, xy_windows):
+        windows.extend(slide_window(image, x_start_stop, y_start_stop, xy_window, xy_overlap))
+
+    hot_windows = search_windows(image, windows, svc, X_scaler,
+                        color_space='YCrCb', spatial_size=spatial_size, hist_bins=hist_bins,
+                        orient=orient, pix_per_cell=pix_per_cell,
+                        cell_per_block=cell_per_block, hog_channel=hog_channel,
+                        spatial_feat=spatial_feat, hist_feat=hist_feat, hog_feat=hog_feat)
+```
 
 ![alt text][image3]
 
