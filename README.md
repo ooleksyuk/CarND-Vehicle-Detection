@@ -1,4 +1,4 @@
-## Vehicle Detection Project
+## <a name="top"></a> Vehicle Detection Project [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](https://www.udacity.com/course/self-driving-car-engineer-nanodegree--nd013)
 
 The goals / steps of this project are the following:
 
@@ -42,7 +42,7 @@ def import_images():
     return cars, notcars
 ```
 The result is 
-```python
+```
 Number of Car images = 8792
 Number of Not-Car images = 8792
 ```
